@@ -7,25 +7,6 @@ async function wait(ms) {
   return result;
 }
 
-const stairsPositions = {
-  stair0: {
-    x: 300,
-    y: 50,
-  },
-  stair1: {
-    x: 270,
-    y: 200,
-  },
-  stair2: {
-    x: 250,
-    y: 200,
-  },
-  stair3: {
-    x: 200,
-    y: 100,
-  },
-};
-
 class Game {
   constructor() {
     PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
@@ -93,10 +74,10 @@ class Game {
     this.initSprite(
       'stair0',
       {
-        x: this.renderer.width + stairsPositions.stair0.x,
-        y: this.renderer.height + stairsPositions.stair0.y,
+        x: this.renderer.width / 2,
+        y: this.renderer.height / 2,
       },
-      { x: 1, y: 1 },
+      { x: -0.15, y: 0.4 },
       this.animateStair,
     );
     this.initSprite('decor1', { x: this.renderer.width, y: this.renderer.height }, { x: 1, y: 1 });
@@ -260,7 +241,7 @@ class Game {
   resetState() {
     this.sprites.hammer.isShowing = true;
     this.hideMenu();
-    this.changeStair(0);
+    this.changeStair('0');
     this.sprites.final.isShowing = false;
     this.sprites.final.alpha = 0;
   }
@@ -323,22 +304,43 @@ class Game {
     let delta;
     return () => {
       if (this.sprites.stair0.switch) {
-        delta = 15;
-        this.sprites.stair0.alpha -= this.sprites.stair0.alpha <= 0 ? 0 : 0.1;
+        delta = 25;
+        this.sprites.stair0.alpha -= this.sprites.stair0.alpha <= 0 ? 0 : 0.05;
         if (this.sprites.stair0.alpha <= 0) {
           this.sprites.stair0.texture = this.loader.resources[`stair${this.sprites.stair0.stairsNum}`].texture;
-          if (this.sprites.stair0.stairsNum === 0) {
-            this.sprites.stair0.x = this.renderer.width + 5;
-            this.sprites.stair0.y = this.renderer.height - 80;
-          } else {
-            this.sprites.stair0.x = this.renderer.width - stairsPositions[`stair${this.sprites.stair0.stairsNum}`].x;
-            this.sprites.stair0.y = this.renderer.height - stairsPositions[`stair${this.sprites.stair0.stairsNum}`].y;
-          }
           this.sprites.stair0.switch = false;
+          this.sprites.stair0.y -= delta;
+          switch (this.sprites.stair0.stairsNum) {
+            case '0': {
+              this.sprites.stair0.anchor.x = -0.15;
+              this.sprites.stair0.anchor.y = 0.4;
+              break;
+            }
+            case '1': {
+              this.sprites.stair0.anchor.x = -0.35;
+              this.sprites.stair0.anchor.y = 0.5;
+              break;
+            }
+            case '2': {
+              this.sprites.stair0.anchor.x = -0.35;
+              this.sprites.stair0.anchor.y = 0.5;
+              break;
+            }
+            case '3': {
+              this.sprites.stair0.anchor.x = -0.25;
+              this.sprites.stair0.anchor.y = 0.5;
+              break;
+            }
+            default: {
+              this.sprites.stair0.anchor.x = -0.15;
+              this.sprites.stair0.anchor.y = 0.4;
+              break;
+            }
+          }
         }
       } else {
         delta -= 1;
-        this.sprites.stair0.alpha += this.sprites.stair0.alpha >= 1 ? 0 : 0.1;
+        this.sprites.stair0.alpha += this.sprites.stair0.alpha >= 1 ? 0 : 0.05;
         this.sprites.stair0.y += delta >= 0 ? 1 : 0;
       }
     };
