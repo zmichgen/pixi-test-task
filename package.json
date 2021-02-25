@@ -1,0 +1,45 @@
+{
+    "name": "pixi",
+    "version": "1.0.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "webpack serve --mode development --open",
+        "build": "webpack --mode production"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@babel/polyfill": "latest",
+        "pixi.js": "latest"
+    },
+    "devDependencies": {
+        "@babel/core": "latest",
+        "@babel/preset-env": "latest",
+        "autoprefixer": "latest",
+        "babel-loader": "latest",
+        "clean-webpack-plugin": "latest",
+        "copy-webpack-plugin": "latest",
+        "css-loader": "latest",
+        "eslint": "latest",
+        "eslint-config-airbnb-base": "latest",
+        "eslint-plugin-import": "latest",
+        "file-loader": "latest",
+        "html-webpack-plugin": "latest",
+        "image-webpack-loader": "latest",
+        "mini-css-extract-plugin": "latest",
+        "node-sass": "latest",
+        "postcss": "latest",
+        "postcss-load-config": "latest",
+        "postcss-loader": "latest",
+        "postcss-plugin": "latest",
+        "postcss-preset-env": "latest",
+        "sass-loader": "latest",
+        "style-loader": "latest",
+        "webpack": "latest",
+        "webpack-cli": "latest",
+        "webpack-dev-server": "latest"
+    }
+}
